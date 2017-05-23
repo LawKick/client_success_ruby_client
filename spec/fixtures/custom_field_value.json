@@ -1,0 +1,14 @@
+{
+  "id": 166,
+  "clientId": null,
+  "fieldId": 1,
+  "valueId": 166,
+  "name": "CoolString",
+  "value": null,
+  "label": "Cool String",
+  "autoSync": false,
+  "type": "STRING",
+  "sequence": 1,
+  "push": false,
+  "pull": false
+}

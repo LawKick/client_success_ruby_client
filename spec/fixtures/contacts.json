@@ -1,0 +1,42 @@
+[
+  {
+    "id": 89,
+    "clientId": 1340,
+    "name": "",
+    "email": "jdoe@example.com",
+    "phone": "(555) 555-1212",
+    "mobile": "(555) 555-1212",
+    "title": "VP, Customer Success",
+    "preferredName": "",
+    "linkedinUrl": "",
+    "photoUrl": null,
+    "firstName": "John",
+    "lastName": "Doe",
+    "tenantId": 6,
+    "executiveSponsor": false,
+    "advocate": false,
+    "champion": false,
+    "lastEngagement": "2015-08-15T21:42:00Z",
+    "engagementCount": 23
+  },
+  {
+    "id": 90,
+    "clientId": 1340,
+    "name": "",
+    "email": "user@example.com",
+    "phone": "",
+    "mobile": "",
+    "title": "Customer Success Manager",
+    "preferredName": "",
+    "linkedinUrl": "",
+    "photoUrl": null,
+    "firstName": "Janet",
+    "lastName": "Doe",
+    "tenantId": 6,
+    "executiveSponsor": false,
+    "advocate": false,
+    "champion": false,
+    "lastEngagement": "2015-06-01T11:23:00Z",
+    "engagementCount": 128
+  }
+]

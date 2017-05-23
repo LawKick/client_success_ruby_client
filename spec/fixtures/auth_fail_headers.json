@@ -1,0 +1,10 @@
+{
+  "Date": "Wed, 24 May 2017 22:33:52 GMT",
+  "Server": "Apache",
+  "Strict-Transport-Security": "max-age=63072000; includeSubdomains; preload",
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Content-Type": "application/json",
+  "Connection": "close",
+  "Transfer-Encoding": "chunked"
+}

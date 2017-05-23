@@ -1,0 +1,52 @@
+[
+  {
+    "id": 17,
+    "resourceId": 2,
+    "name": "TEST Date",
+    "label": "Birthdate",
+    "typeId": 5,
+    "type": "DATE",
+    "sequence": 50,
+    "autoSync": false
+  },
+  {
+    "id": 15,
+    "resourceId": 2,
+    "name": "TEST Integer",
+    "label": "Cool integer",
+    "typeId": 3,
+    "type": "INTEGER",
+    "sequence": 30,
+    "autoSync": false
+  },
+  {
+    "id": 16,
+    "resourceId": 2,
+    "name": "TEST Decimal",
+    "label": "Favorite decimal",
+    "typeId": 4,
+    "type": "DECIMAL",
+    "sequence": 40,
+    "autoSync": false
+  },
+  {
+    "id": 13,
+    "resourceId": 2,
+    "name": "TEST Boolean",
+    "label": "Test boolean",
+    "typeId": 1,
+    "type": "BOOLEAN",
+    "sequence": 10,
+    "autoSync": false
+  },
+  {
+    "id": 14,
+    "resourceId": 2,
+    "name": "TEST String",
+    "label": "Test string",
+    "typeId": 2,
+    "type": "STRING",
+    "sequence": 20,
+    "autoSync": false
+  }
+]

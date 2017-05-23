@@ -1,0 +1,5 @@
+require 'client_success/resources/base'
+require 'client_success/resources/custom_field'
+require 'client_success/resources/custom_field_value'
+require 'client_success/resources/client'
+require 'client_success/resources/contact'

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 144,
+    "tenantId": 6,
+    "name": "Acme Incorporated",
+    "successScore": 134,
+    "managedByEmployeeId": 131,
+    "monthlyRecurringRevenue": null,
+    "annualRecurringRevenue": null,
+    "oneTimeRevenue": null,
+    "annualContractValue": null,
+    "totalContractValue": null,
+    "renewalDate": null,
+    "clientSegmentId": null,
+    "segment": null,
+    "lastTouchDateTime": null,
+    "lastTouchTypeId": null,
+    "lastTouchType": null
+  },
+  {
+    "id": 70,
+    "tenantId": 6,
+    "name": "Brand New Client",
+    "successScore": 3,
+    "managedByEmployeeId": 47,
+    "monthlyRecurringRevenue": null,
+    "annualRecurringRevenue": null,
+    "oneTimeRevenue": null,
+    "annualContractValue": null,
+    "totalContractValue": null,
+    "renewalDate": null,
+    "clientSegmentId": 23,
+    "segment": "Enterprise",
+    "lastTouchDateTime": null,
+    "lastTouchTypeId": null,
+    "lastTouchType": null
+  }
+]
