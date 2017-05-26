@@ -120,8 +120,15 @@ module ClientSuccess
       "/v#{API[:version]}#{path}"
     end
 
+    # Use or retrieve the access token from Client Success.
+    # Will default to an empty string to avoid runtime errors
+    # when testing with mock servers.
+    #
+    # @return [String]
+    #
     def access_token
-      @access_token ||= request_access_token(email, password)['access_token']
+      @access_token ||=
+        request_access_token(email, password)['access_token'] || ''
     end
 
     # @param [Faraday::Connection] connection
