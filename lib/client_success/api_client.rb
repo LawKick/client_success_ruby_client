@@ -88,8 +88,7 @@ module ClientSuccess
     end
 
     def connection
-      @connection ||= Faraday.new(url: API[:domain]) do |conn|
-        # conn.token_auth(access_token)
+      @connection ||= Faraday.new(url: api_url) do |conn|
         conn.headers['Authorization'] = access_token
         apply_default_connection_opts_to(conn)
       end

@@ -7,7 +7,13 @@ module ClientSuccess
     module Authentication
       private
 
-      # Returns a hash response from
+      # Returns the hash response from ClientSuccess
+      # containing the 'access-token' key.
+      #
+      # @param [String] username
+      # @param [String] password
+      # @return [Hash]
+      #
       def request_access_token(username, password)
         resp = auth_connection.post(
           build_api_endpoint_for('/auth'),
