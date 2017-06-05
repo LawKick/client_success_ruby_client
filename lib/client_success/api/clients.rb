@@ -38,12 +38,29 @@ module ClientSuccess
         false
       end
 
+      # GET /v1/clients?externalId=<external_id>
+      #
+      # Gets details for a client based on the client's
+      # external id. See:
+      # http://docs.clientsuccessapi.apiary.io/#reference/clients/client/get-client-details-by-external-id
+      #
+      # @param [Integer or String] ext_id
+      # @return [Resources::Client or NilClass]
+      #
+      def client_from_external_id(ext_id)
+        resp = get CLIENT_API_PATH, params: { 'externalId' => ext_id }
+        result = process_response(resp)
+        Resources::Client.new(result)
+      rescue Errors::NotFound
+        nil
+      end
+
       # GET /v1/clients/:client_id
       #
       # Gets details for a client. See:
       # http://docs.clientsuccessapi.apiary.io/#reference/clients/client/get-a-client-detail
       #
-      # @param [Integer or String]
+      # @param [Integer or String] id
       # @return [Resources::Client or NilClass]
       #
       def client_from_id(id)

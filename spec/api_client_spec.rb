@@ -95,6 +95,32 @@ RSpec.describe ClientSuccess::ApiClient do
       end
     end
   end
+  describe 'client_from_external_id' do
+    subject { client.client_from_external_id(id) }
+    let(:resource) { ClientSuccess::Resources::Client.new(attrs) }
+    let(:attrs) { read_fixture_as_hash('client') }
+    context 'when client exists' do
+      let(:id) { resource.external_id }
+      it do
+        res = subject
+        expect(res).to be_a ClientSuccess::Resources::Client
+        expect(res.id).to eq resource.id
+      end
+    end
+    context 'when client does not exist' do
+      let(:id) { 1234 }
+      before do
+        stub_request(:get, 'https://api.clientsuccess.com/v1/clients?externalId=1234')
+          .with(headers: {
+                  'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4'
+                })
+          .to_return(status: 404, body: '', headers: {})
+      end
+      it do
+        expect(subject).to be_nil
+      end
+    end
+  end
   describe 'client_from_id' do
     subject { client.client_from_id(id) }
     let(:resource) { ClientSuccess::Resources::Client.new(attrs) }

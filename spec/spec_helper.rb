@@ -47,11 +47,17 @@ RSpec.configure do |config|
     stub_request(:post, 'https://api.clientsuccess.com/v1/clients')
       .with(headers: {
               'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4',
-              'Content-Type' => 'application/json',
+              'Content-Type' => 'application/json'
             })
       .to_return(status: 201,
                  body: '',
                  headers: { 'Location' => '/clients/1300' })
+
+    stub_request(:get, 'https://api.clientsuccess.com/v1/clients?externalId=ABC123')
+      .with(headers: {
+              'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4'
+            })
+      .to_return(status: 200, body: read_fixture('client'), headers: {})
 
     stub_request(:get, 'https://api.clientsuccess.com/v1/clients/1306')
       .with(headers: {
