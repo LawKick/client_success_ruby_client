@@ -12,16 +12,13 @@ for other areas of the API very welcomed!
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'client_success_ruby_client'
+gem 'client_success_ruby_client',
+    git: 'git://github.com/LawKick/client_success_ruby_client.git'
 ```
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install client_success_ruby_client
 
 ## Usage
 
@@ -38,7 +35,7 @@ You can then use the client to access all available endpoints:
 ```ruby
 clients = api.all_clients
 # => array of all ClientSuccess clients
-client = api.first
+client = clients.first
 # => a ClientSuccess::Resources::Client object
 client.external_id
 # => the client's externalId (note how accessor method is snake-cased)
