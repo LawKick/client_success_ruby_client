@@ -5,6 +5,7 @@ module ClientSuccess
     #
     module Clients
       CLIENT_API_PATH = '/clients'.freeze
+      CUSTOM_FIELD_UPDATE_PATH = '/customfield/value/client'.freeze
 
       # GET /v1/clients
       #
@@ -85,6 +86,29 @@ module ClientSuccess
       def update_client(client)
         raise ArgumentError, 'Cannot update without id' if client.id.nil?
         resp = put "#{CLIENT_API_PATH}/#{client.id}", params: client.as_json
+        process_response(resp)
+        true
+      rescue Errors::UnprocessableEntity
+        false
+      end
+
+      # PATCH /v1/customfield/value/client/:client_id
+      #
+      # Updates a single custom field for a client.
+      # NOTE: It is not clear, but this species of custom fields
+      # appear to be different than the typical resource custom
+      # field, which applies to the Contact resource.
+      #
+      # @param [Resources::Client] client
+      # @param [String] cf_hash
+      #   A JSON hash of the custom field, e.g.:
+      #   { 'My Custom Field': 'foo' }
+      # @return [Boolean]
+      #
+      def update_client_custom_field(client, cf_hash)
+        raise ArgumentError, 'Cannot update without id' if client.id.nil?
+        resp = patch "#{CUSTOM_FIELD_UPDATE_PATH}/#{client.id}",
+                     params: cf_hash
         process_response(resp)
         true
       rescue Errors::UnprocessableEntity

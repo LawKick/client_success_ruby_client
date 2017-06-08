@@ -163,6 +163,24 @@ RSpec.describe ClientSuccess::ApiClient do
       it { expect(subject).to eq false }
     end
   end
+  describe 'update_client_custom_field' do
+    subject { client.update_client_custom_field(resource, cf) }
+    let(:resource) { ClientSuccess::Resources::Client.new(attrs) }
+    let(:attrs) { read_fixture_as_hash('client') }
+    let(:cf) { { 'My Custom Field': 'foo bar' } }
+    it { expect(subject).to eq true }
+    context 'when fails' do
+      before do
+        stub_request(:patch, 'https://api.clientsuccess.com/v1/customfield/value/client/1306')
+          .with(headers: {
+                  'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4',
+                  'Content-Type' => 'application/json'
+                })
+          .to_return(status: 422, body: '', headers: {})
+      end
+      it { expect(subject).to eq false }
+    end
+  end
   describe 'delete_client' do
     subject { client.delete_client(id) }
     let(:resource) { ClientSuccess::Resources::Client.new(attrs) }

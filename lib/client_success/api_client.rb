@@ -67,6 +67,14 @@ module ClientSuccess
       end
     end
 
+    def patch(path, opts = {})
+      connection.patch do |req|
+        req.url build_api_endpoint_for(path)
+        req.headers['Content-Type'] = opts[:content_type] || CONTENT_TYPE
+        req.body = JSON.generate(opts[:params])
+      end
+    end
+
     def delete(path)
       connection.delete do |req|
         req.url build_api_endpoint_for(path)

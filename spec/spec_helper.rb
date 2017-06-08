@@ -71,6 +71,13 @@ RSpec.configure do |config|
             })
       .to_return(status: 204, body: '', headers: {})
 
+    stub_request(:patch, 'https://api.clientsuccess.com/v1/customfield/value/client/1306')
+      .with(headers: {
+              'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4',
+              'Content-Type' => 'application/json'
+            })
+      .to_return(status: 200, body: '', headers: {})
+
     stub_request(:delete, 'https://api.clientsuccess.com/v1/clients/1306')
       .with(headers: {
               'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4'
