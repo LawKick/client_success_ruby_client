@@ -409,86 +409,6 @@ RSpec.describe ClientSuccess::ApiClient do
       end
     end
   end
-  describe 'create_contact' do
-    subject { client.create_contact(contact) }
-    let(:contact) { ClientSuccess::Resources::Contact.new(attrs) }
-    let(:attrs) { read_fixture_as_hash('contact').tap { |h| h.delete('id') } }
-    it do
-      expect(subject).to eq true
-    end
-    context 'when client specified' do
-      subject { client.create_contact(contact, for_client: client_res) }
-      let(:attrs) do
-        read_fixture_as_hash('contact').tap do |h|
-          h.delete_if { |k| %w(id clientId).include?(k) }
-        end
-      end
-      let(:client_res) { ClientSuccess::Resources::Client.new(client_attrs) }
-      let(:client_attrs) { read_fixture_as_hash('client').merge('id' => 1340) }
-      it { expect(subject).to eq true }
-      context 'by id' do
-        let(:client_res) { 1340 }
-        it { expect(subject).to eq true }
-      end
-    end
-    context 'when client not specified' do
-      let(:attrs) do
-        read_fixture_as_hash('contact').tap do |h|
-          h.delete_if { |k| %w(id clientId).include?(k) }
-        end
-      end
-      it do
-        expect { subject }.to raise_error(ArgumentError)
-      end
-    end
-    context 'when contact id provided' do
-      let(:attrs) { read_fixture_as_hash('contact') }
-      it { expect { subject }.to raise_error(ArgumentError) }
-    end
-    context 'when not processable' do
-      before do
-        stub_request(:post, 'https://api.clientsuccess.com/v1/clients/1340/contacts')
-          .with(headers: {
-                  'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4',
-                  'Content-Type' => 'application/json'
-                })
-          .to_return(status: 422,
-                     body: '',
-                     headers: {})
-      end
-      it { expect(subject).to eq false }
-    end
-  end
-  describe 'contact_from_id' do
-    subject { client.contact_from_id(id, for_client: client_id) }
-    let(:id) { 89 }
-    let(:client_id) { 1306 }
-    it do
-      expect(subject).to be_a ClientSuccess::Resources::Contact
-    end
-    context 'using a Client object' do
-      let(:client_id) do
-        ClientSuccess::Resources::Client.new(read_fixture_as_hash('client'))
-      end
-      it do
-        expect(subject).to be_a ClientSuccess::Resources::Contact
-      end
-    end
-    context 'when contact does not exist' do
-      let(:id) { 1234 }
-      before do
-        stub_request(:get,
-                     'https://api.clientsuccess.com/v1/clients/1306/contacts/1234')
-          .with(headers: {
-                  'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4'
-                })
-          .to_return(status: 404, body: '', headers: {})
-      end
-      it do
-        expect(subject).to be_nil
-      end
-    end
-  end
   describe 'update_contact_details' do
     subject { client.update_contact_details(contact) }
     let(:contact) { ClientSuccess::Resources::Contact.new(attrs) }
@@ -538,11 +458,16 @@ RSpec.describe ClientSuccess::ApiClient do
     subject { client.create_detailed_contact(contact) }
     let(:contact) { ClientSuccess::Resources::Contact.new(attrs) }
     let(:attrs) { read_fixture_as_hash('contact').tap { |h| h.delete('id') } }
+    it { expect(subject).to eq true }
     it do
-      expect(subject).to eq true
+      expect(contact.id).to be_nil
+      subject
+      expect(contact.id).to eq 89
     end
     context 'when client specified' do
-      subject { client.create_contact(contact, for_client: client_res) }
+      subject do
+        client.create_detailed_contact(contact, for_client: client_res)
+      end
       let(:attrs) do
         read_fixture_as_hash('contact').tap do |h|
           h.delete_if { |k| %w(id clientId).include?(k) }
@@ -551,6 +476,11 @@ RSpec.describe ClientSuccess::ApiClient do
       let(:client_res) { ClientSuccess::Resources::Client.new(client_attrs) }
       let(:client_attrs) { read_fixture_as_hash('client').merge('id' => 1340) }
       it { expect(subject).to eq true }
+      it do
+        expect(contact.id).to be_nil
+        subject
+        expect(contact.id).to eq 89
+      end
       context 'by id' do
         let(:client_res) { 1340 }
         it { expect(subject).to eq true }

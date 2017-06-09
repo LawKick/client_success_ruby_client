@@ -168,6 +168,7 @@ module ClientSuccess
         resp = post "#{contact_path_for(client_id: client_id)}/details",
                     params: contact.as_json
         process_response(resp)
+        contact.id = extract_id_from_location_path(resp.headers['Location'])
         true
       rescue Errors::UnprocessableEntity
         false
