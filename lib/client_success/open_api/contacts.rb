@@ -1,5 +1,5 @@
 module ClientSuccess
-  module Api
+  module OpenApi
     # Module containing the available methods to access
     # Contact objects from ClientSuccess.
     #

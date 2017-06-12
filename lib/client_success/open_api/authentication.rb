@@ -1,5 +1,5 @@
 module ClientSuccess
-  module Api
+  module OpenApi
     # Methods to retrieve a Client Success access token.
     # See:
     # http://docs.clientsuccessapi.apiary.io/#reference/authentication/create-an-access-token

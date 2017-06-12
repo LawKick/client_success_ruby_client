@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe ClientSuccess::ApiClient do
+RSpec.describe ClientSuccess::OpenApi::Client do
   let(:client) { described_class.new(email: email, password: pw) }
   let(:email) { 'foo@bar.com' }
   let(:pw) { 'foo' }
@@ -8,6 +8,14 @@ RSpec.describe ClientSuccess::ApiClient do
     it 'should not raise error' do
       expect(client.email).to eq email
       expect(client.password).to eq pw
+    end
+    context 'when module method used' do
+      it 'should not raise error' do
+        c = ClientSuccess::OpenApi.new(email: email, password: pw)
+        expect(c).to be_a ClientSuccess::OpenApi::Client
+        expect(c.email).to eq email
+        expect(c.password).to eq pw
+      end
     end
     context 'when email not provided' do
       let(:email) { nil }

@@ -76,7 +76,7 @@ RSpec.configure do |config|
               'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4',
               'Content-Type' => 'application/json'
             })
-      .to_return(status: 200, body: '', headers: {})
+      .to_return(status: 200, body: '"Update successful"', headers: {})
 
     stub_request(:delete, 'https://api.clientsuccess.com/v1/clients/1306')
       .with(headers: {
@@ -144,5 +144,11 @@ RSpec.configure do |config|
       .to_return(status: 200,
                  headers: { 'Content-Type': 'application/json' },
                  body: read_fixture('custom_fields'))
+    stub_request(:post,
+                 'https://usage.clientsuccess.com/collector/1.0.0/projects/foo/events/some_event?api_key=bar')
+      .with(headers: { 'Content-Type' => 'application/json' })
+      .to_return(status: 200,
+                 body: JSON.generate('created': true),
+                 headers: { 'Content-Type': 'application/json' })
   end
 end
