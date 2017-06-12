@@ -144,5 +144,11 @@ RSpec.configure do |config|
       .to_return(status: 200,
                  headers: { 'Content-Type': 'application/json' },
                  body: read_fixture('custom_fields'))
+    stub_request(:post,
+                 'https://usage.clientsuccess.com/collector/1.0.0/projects/foo/events/some_event?api_key=bar')
+      .with(headers: { 'Content-Type' => 'application/json' })
+      .to_return(status: 200,
+                 body: JSON.generate('created': true),
+                 headers: { 'Content-Type': 'application/json' })
   end
 end
