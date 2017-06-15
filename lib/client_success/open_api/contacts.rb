@@ -168,7 +168,12 @@ module ClientSuccess
         resp = post "#{contact_path_for(client_id: client_id)}/details",
                     params: contact.as_json
         process_response(resp)
-        contact.id = extract_id_from_location_path(resp.headers['Location'])
+        id = extract_id_from_location_path(resp.headers['Location'])
+        # Reflects ClientSuccess' response when the contact already
+        # exists for this client -- it returns an OK response with
+        # an '' for the 'Location' header.
+        raise Errors::UnprocessableEntity if id.zero?
+        contact.id = id
         true
       rescue Errors::UnprocessableEntity
         false

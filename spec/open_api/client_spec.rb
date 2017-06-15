@@ -516,9 +516,30 @@ RSpec.describe ClientSuccess::OpenApi::Client do
         ).with(headers: {
                  'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4',
                  'Content-Type' => 'application/json'
-               }).to_return(status: 422, body: '', headers: {})
+               }).to_return(status: 422,
+                            body: '',
+                            headers: {})
       end
       it { expect(subject).to eq false }
+    end
+    context 'when ClientSuccess returns empty Location' do
+      # ClientSuccess will return an :ok response with an empty location
+      # header string when the contact already exists (presumably determined
+      # by email address).
+      before do
+        stub_request(
+          :post,
+          'https://api.clientsuccess.com/v1/clients/1340/contacts/details'
+        ).with(headers: {
+                 'Authorization' => 'bc7b4279-9b7f-4a1f-8f46-d72e753cf4f4',
+                 'Content-Type' => 'application/json'
+               }).to_return(status: 200, body: '', headers: { 'Location' => '' })
+      end
+      it { expect(subject).to eq false }
+      it do
+        expect(contact.id).to be_nil
+        expect { subject }.not_to change(contact, :id)
+      end
     end
   end
   describe 'contact_custom_fields' do
