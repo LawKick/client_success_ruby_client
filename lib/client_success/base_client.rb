@@ -1,3 +1,5 @@
+require 'faraday'
+require 'json'
 require 'client_success/errors'
 
 module ClientSuccess

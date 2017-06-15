@@ -1,4 +1,3 @@
-require 'faraday'
 require 'client_success/open_api/authentication'
 require 'client_success/open_api/clients'
 require 'client_success/open_api/contacts'

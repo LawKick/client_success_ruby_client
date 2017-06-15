@@ -25,21 +25,22 @@ module ClientSuccess
       # The single API point. See:
       # http://docs.clientsuccessusage.apiary.io/#introduction/events-api
       #
-      # ClientSuccess' documentation is unclear, but it appears that the
-      # 'identity' properties 'organization' and 'user' refer to a Client
-      # and a Contact, respectively.
+      # The 'identity' properties 'organization' and 'user' refer to a Client
+      # and a Contact, respectively. If organization is not provided, the
+      # request will create the event (if it didn't exist before), but it
+      # will not be tracked.
       #
       # @param [String] id
       #   The event id that you want to track. It appears from the
       #   the documentation that these are dynamically created.
-      # @param [ClientSuccess::Resources::Client] org
-      # @param [ClientSuccess::Resources::Contact] user
+      # @option [ClientSuccess::Resources::Client] org
+      # @option [ClientSuccess::Resources::Contact] user
       # @option [Integer] value
       #   Change if you wish to signify multiple events of
       #   this kind.
       # @return [Boolean]
       #
-      def add_event(id, org:, user:, value: 1)
+      def add_event(id, org: {}, user: {}, value: 1)
         params = create_payload(org, user, value)
         resp = connection.post do |req|
           req.url build_api_endpoint(id)
@@ -83,6 +84,7 @@ module ClientSuccess
       end
 
       def organization_payload(org)
+        return org if org.is_a?(Hash)
         {
           id: org.id,
           name: org.name
@@ -90,6 +92,7 @@ module ClientSuccess
       end
 
       def user_payload(user)
+        return user if user.is_a?(Hash)
         {
           id: user.id,
           name: "#{user.first_name} #{user.last_name}",

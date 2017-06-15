@@ -40,6 +40,11 @@ RSpec.describe ClientSuccess::UsageApi::Client do
     it do
       expect(subject).to eq true
     end
+    context 'when neither user or org provided' do
+      it do
+        expect(client.add_event(event_id)).to eq true
+      end
+    end
     context 'when fails' do
       it do
         # Presuming that ClientSuccess will respond with a 422
