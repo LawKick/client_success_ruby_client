@@ -33,8 +33,8 @@ module ClientSuccess
       # @param [String] id
       #   The event id that you want to track. It appears from the
       #   the documentation that these are dynamically created.
-      # @option [ClientSuccess::Resources::Client] org
-      # @option [ClientSuccess::Resources::Contact] user
+      # @option [ClientSuccess::Resources::Client or Hash] org
+      # @option [ClientSuccess::Resources::Contact or Hash] user
       # @option [Integer] value
       #   Change if you wish to signify multiple events of
       #   this kind.
