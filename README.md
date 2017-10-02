@@ -112,7 +112,7 @@ api.update_client(my_client)
 # But this will work...
 my_detailed_client = api.client_from_id(my_client.id)
 my_detailed_client.zendesk_id = '123456'
-api.update_client(my_client)
+api.update_client(my_detailed_client)
 ```
 
 A pull request to have the gem automatically handle this would
